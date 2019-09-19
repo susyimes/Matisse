@@ -63,6 +63,7 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT;
 public final class SelectionCreator {
     private final Matisse mMatisse;
     private final SelectionSpec mSelectionSpec;
+    private boolean darkfont=false;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @IntDef({
@@ -127,6 +128,11 @@ public final class SelectionCreator {
      */
     public SelectionCreator theme(@StyleRes int themeId) {
         mSelectionSpec.themeId = themeId;
+        return this;
+    }
+    public SelectionCreator theme(@StyleRes int themeId,boolean darkfont) {
+        mSelectionSpec.themeId = themeId;
+        this.darkfont=darkfont;
         return this;
     }
 
@@ -355,6 +361,7 @@ public final class SelectionCreator {
         }
 
         Intent intent = new Intent(activity, MatisseActivity.class);
+        intent.putExtra(MatisseActivity.DARKFONT,darkfont);
 
         Fragment fragment = mMatisse.getFragment();
         if (fragment != null) {

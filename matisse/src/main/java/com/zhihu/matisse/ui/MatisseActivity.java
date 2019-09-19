@@ -39,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.zhihu.matisse.R;
 import com.zhihu.matisse.internal.entity.Album;
 import com.zhihu.matisse.internal.entity.Item;
@@ -74,6 +75,7 @@ public class MatisseActivity extends AppCompatActivity implements
     public static final String EXTRA_RESULT_SELECTION = "extra_result_selection";
     public static final String EXTRA_RESULT_SELECTION_PATH = "extra_result_selection_path";
     public static final String EXTRA_RESULT_ORIGINAL_ENABLE = "extra_result_original_enable";
+    public static final String DARKFONT = "darkfont";
     private static final int REQUEST_CODE_PREVIEW = 23;
     private static final int REQUEST_CODE_CAPTURE = 24;
     public static final String CHECK_STATE = "checkState";
@@ -105,6 +107,9 @@ public class MatisseActivity extends AppCompatActivity implements
             return;
         }
         setContentView(R.layout.activity_matisse);
+        if (getIntent().getBooleanExtra(DARKFONT,false)) {
+            ImmersionBar.with(this).statusBarDarkFont(true).init();
+        }
 
         if (mSpec.needOrientationRestriction()) {
             setRequestedOrientation(mSpec.orientation);
